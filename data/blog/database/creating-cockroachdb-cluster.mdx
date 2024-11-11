@@ -1,0 +1,75 @@
+---
+title: "Creating a CockroachDB cluster"
+date: '2022-05-05'
+draft: false
+thumbnail: '/static/images/blog/thumbs/cockroach_labs_logo.png'
+tags: [ 'Database']
+summary: "Creating a CockroachDB cluster"
+
+---
+
+CockroachDB is a distributed SQL database management system, developed by Cockroach Labs. 
+It is relatively new entrant to the database space & designed for speed, scale, and survival. 
+It scales horizontally; survives disk, machine, rack, and even datacenter failures. Likewise, it supports strongly-consistent ACID transactions and provides a familiar SQL API for manipulating and querying data.
+
+If you are building demo machine learning apps then chances are that you need to log/store some training runs or other data. 
+Also, if you need to test some API end points for highly distributed application, then you might find CockroachDB Serverless setup much useful.
+
+
+
+#### Here is why should definitely check out CockroachDB
+The main reason to try out CockroachDB is that they offer a Fully-managed, auto-scale CockroachDB cluster; which you can use to experiment with.
+
+Highlights of the free tier are:
+- 5 GB data storage
+- 250M Request Units/month
+- No credit card required
+
+#### Create your account
+- Visit https://cockroachlabs.cloud/signup to create your account 
+- Enter Email ID, your username & password.
+- Credit card & payment setup is not required for the free tier.
+
+<ArticleImage src={"/static/images/blog/database/cockroachdb_signup.png"} alt={"Signup"}  />
+
+
+
+#### Create a new cluster
+Once you have created your account, it's time to spin up a new database cluster. 
+- On the login page, click "create cluster" button 
+- Choose the Serverless plan. 
+- You can choose either Google Cloud or AWS. 
+- Choose the region that you would prefer your db server to be hoisted at. 
+- Edit the cluster name or go with the default one. 
+- Once your cluster is created, generate and save a password.
+
+
+<ArticleImage src={"/static/images/blog/database/cockroachdb_create_cluster.png"} alt={"Create Cluster"}  />
+
+
+#### Create SQL user
+Once the cluster is ready, we have to create a SQL user, using which we will interact with the database. 
+- Define your SQL user ID
+- Generate a password. 
+- Make sure you copy the generated password immediately and save it separately for future use. 
+- Password will not be displayed again & hence if you save it separately, or else you might have to generate it again.
+- Choose the region that you would prefer your db server to be hoisted at. 
+- Edit the cluster name or go with the default one. 
+- Once your cluster is created, generate and save a password.
+
+<ArticleImage src={"/static/images/blog/database/cockroachdb_create_sqluser.png"} alt={"Create User"}  />
+
+
+#### Connect to Database using our created user ID
+- We can connect from our local system using CockroachDB client.
+- We can connect using psycopg2, SQLAlchemy etc. if we are using python.
+- To connect to our Database, we can use the connection string parameters.
+
+ 
+<ArticleImage src={"/static/images/blog/database/cockroachdb_connect.png"} alt={"Connect to Cluster"}  />
+
+
+Thank you for reading this post. 
+If you want to find how to setup to CockroachDB client in your local system then be sure to check this post [here](/blog/installing-cockroachdb-client-ubuntu/).
+
+
