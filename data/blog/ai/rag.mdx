@@ -1,0 +1,55 @@
+---
+title: "What is Retrieval Augmented Generation (RAG)"
+date: '2025-02-02'
+draft: false
+thumbnail: '/static/images/blog/thumbs/rag.png'
+tags: ['ai']
+summary: "Retrieval-Augmented Generation (RAG) is a technique enhances large language models by first retrieving relevant information from an external knowledge source, and then uses retrieved information to generate the response. This helps to provide more accurate and reliable answers by minimizing the generation of hallucinated content."
+---
+
+Retrieval-Augmented Generation (RAG) is a technique enhances large language models by first retrieving relevant information from an external knowledge source, and then uses retrieved information to generate the response. This helps to provide more accurate and reliable answers by minimizing the generation of hallucinated content.
+
+RAG combines two powerful AI techniques:
+
+1. **Retrieval**: Fetching relevant information from a vector store/database.
+2. **Generation**: Using a large language model to generate output response.
+
+By integrating external data sources, RAG ensures the generated responses are grounded in factual information, thus reducing the chance of inaccurate responses.
+
+### Core Prerequisites
+1. **Curated Knowledge Base:** This is the set of documents which we want our model to search and generate the responses for our query. This can be text files, CSVV, Json, word, pdf, ppt, xlsx files etc. The quality and relevance of this knowledge base will directly impact the accuracy and usefulness of the RAG system.
+2. **Vector Store:** This is where the curated data is stored in the form of vector embeddings. These embeddings allow for fast and efficient semantic search, enabling the RAG system to retrieve relevant context based on meaning rather than just keyword matches.
+
+### How Does RAG Work?
+
+RAG operates in two stages:
+
+1. **Retriever Component**
+    - When a user inputs a query, RAG first searches a predefined database for relevant snippets.
+    - Tools like vector databases (e.g., Qdrant, Pinecone, etc.) enable efficient similarity searches by converting text into numerical embeddings.
+2. **Generator Component**
+    - The retrieved context is fed into a generative model (e.g., GPT, Llama) alongside the original query.
+    - The model synthesizes the retrieved data and the query to craft a coherent, accurate response.
+
+#### Use Cases for RAG
+- **Customer Support**: Answer queries using internal documentation or product manuals.
+- **Content Creation**: Generate blog posts or reports backed by cited sources.
+- **Research Assistance**: Summarize scientific papers or legal documents.
+- **Education**: Provide students with explanations grounded in textbooks.
+
+#### Preprocess to remove unwanted tags
+
+- **Retrieval Accuracy & Relevance**: Ensuring the system retrieves truly relevant documents for the user's query is a core challenge. This includes handling complex, ambiguous, and multi-faceted queries, and maintaining up-to-date knowledge. Irrelevant retrievals lead to poor generations.
+
+- **Faithful and Coherent Generation**: The generation model must accurately synthesize information from retrieved documents without hallucinating or misinterpreting the context. This includes challenges like combining information from multiple sources, avoiding contradictions, and respecting length constraints.
+
+- **Handling Complexity and Ambiguity**: RAG struggles with complex queries requiring multi-hop reasoning, dealing with ambiguous questions, and managing conflicting information across retrieved documents. Effectively resolving these nuances is crucial for accuracy and reliability.
+
+- **Scalability & Efficiency**: As knowledge bases grow, maintaining fast retrieval speeds and overall system performance becomes computationally expensive. This also includes the complexities of handling large documents and optimizing the entire pipeline for latency and cost.
+
+- **Evaluation & Explainability**: Developing good evaluation metrics to assess both retrieval and generation quality, along with understanding why a RAG system produces a particular response, are significant challenges for debugging and building trust. The system also needs to handle dynamic conversational contexts.
+
+
+
+
+
