@@ -1,0 +1,121 @@
+---
+title: "Building a Simple Conversational AI with Langchain and Gemini"
+date: '2025-03-16'
+draft: false
+thumbnail: '/static/images/blog/thumbs/gemini_langchain.png'
+tags: ['ai']
+summary: "Easily connect to Google's Gemini API with Langchain using this quickstart guide, empowering you to build AI applications in minutes."
+---
+
+
+## Introduction
+
+In this blog post, we'll walk through a simple Python example that demonstrates how to build a basic conversational AI using Langchain and Gemini. This example will showcase the fundamental concepts involved in setting up the environment, defining prompts, interacting with the model, and managing the conversation flow.
+
+## Prerequisites
+
+Before we dive in, make sure you have the following:
+
+*   **Python 3.9 or higher:**  Make sure you have a compatible version of Python installed on your system.
+*   **Langchain:**  Install Langchain using pip: pip install langchain langchain-google-genai
+*   **A Gemini API Key:**  This is the key that unlocks access to the Gemini API. You can get this from [Google AI Studio](https://aistudio.google.com/)
+
+### Step-by-Step Guide: Connecting to Gemini with Langchain
+
+1.  **Installation:**
+
+    First, we need to install the necessary packages. Open your terminal or command prompt and run the following:
+
+    ```bash
+    pip install langchain google-generativeai langchain-google-genai
+    ```
+
+    This command installs the Langchain library and the specific integration package for Google Gemini.
+
+2.  **Setting up your Google API Key:**
+
+    This is a crucial step.  You need to securely provide your Google API key to your code.  **Never hardcode your API key directly into your script if you plan to share it or put it in a public repository!**
+
+    A recommended approach is to use environment variables.  Here's how:
+
+    *   **Set the environment variable:**
+        *   **Linux/macOS:**  In your terminal, run:
+            ```bash
+            export GOOGLE_API_KEY="YOUR_ACTUAL_API_KEY"
+            ```
+            Replace `"YOUR_ACTUAL_API_KEY"` with your actual key.
+        *   **Windows:** In the Command Prompt, run:
+            ```
+            set GOOGLE_API_KEY="YOUR_ACTUAL_API_KEY"
+            ```
+            Or, use the System Properties dialog (search for "environment variables" in the Windows search bar) to set the environment variable permanently.
+
+    *   **Access the API key in your code:**
+
+        We'll use `os.environ` to read the API key from the environment variable.
+
+3.  **The Code:**
+
+    Now, let's write the Python code to connect to Gemini using Langchain:
+
+    ```python
+    import os
+
+    from langchain_google_genai import ChatGoogleGenerativeAI
+    from langchain_core.prompts import ChatPromptTemplate
+    from langchain_core.messages import HumanMessage, AIMessage, SystemMessage
+
+    def main():
+        google_api_key = os.environ.get("GOOGLE_API_KEY")
+        if not google_api_key:
+            raise ValueError("GOOGLE_API_KEY environment variable not set.")
+        
+        chat_model = ChatGoogleGenerativeAI(model="gemini-2.0-flash", google_api_key=google_api_key)
+        
+        system_prompt = "You are a helpful AI assistant."
+        prompt = ChatPromptTemplate.from_messages(
+            [
+                SystemMessage(content=system_prompt),
+            ]
+        )
+        
+        messages = prompt.format_messages()
+        
+        while True:
+            user_input = input("You: ")
+            if user_input.lower() == "quit":
+                break
+            
+            messages.append(HumanMessage(content=user_input))
+
+            response = chat_model.invoke(messages)
+
+            print(f"Assistant: {response.content}")
+
+            messages.append(AIMessage(content=response.content))
+
+    if __name__ == "__main__":
+        main()
+    ```
+
+
+4.  **Running the Code:**
+
+    Save the code as a Python file (e.g., `gemini_test.py`).  Then, in your terminal, navigate to the directory where you saved the file and run:
+
+    ```bash
+    python gemini_test.py
+    ```
+
+    If everything is set up correctly, you should see a joke printed in your terminal!
+
+
+5. **Example Conversation:**
+
+    ```bash
+    $ python main.py 
+    You: hi
+    Assistant: Hi there! How can I help you today?
+    You: who are you?
+    Assistant: I am a large language model, trained by Google.
+    ```
